@@ -34,10 +34,8 @@ namespace FileUpload.Services
 
         public async Task CopyStream(Stream stream, string downloadPath)
         {
-            using (var fileStream = new FileStream(downloadPath, FileMode.Create, FileAccess.Write))
-            {
-                await stream.CopyToAsync(fileStream);
-            }
+            using var fileStream = new FileStream(downloadPath, FileMode.Create, FileAccess.Write);
+            await stream.CopyToAsync(fileStream);
         }
 
         public async Task PostFileAsync(IFormFile fileData, FileType fileType)
